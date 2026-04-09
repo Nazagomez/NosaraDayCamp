@@ -1,5 +1,6 @@
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useViewportParallax } from '../hooks/use-viewport-parallax'
 
 const WHATSAPP_E164 = '50686068903'
 const MAP_EMBED_SRC =
@@ -28,6 +29,18 @@ const initialForm: FormState = {
  */
 export default function ContactSection(): React.JSX.Element {
   const { t } = useTranslation()
+  const topMeasureRef = useRef<HTMLDivElement | null>(null)
+  const bottomMeasureRef = useRef<HTMLDivElement | null>(null)
+  const topParallax = useViewportParallax<HTMLDivElement>({
+    maxShiftPx: 52,
+    direction: 1,
+    measureRef: topMeasureRef,
+  })
+  const bottomParallax = useViewportParallax<HTMLDivElement>({
+    maxShiftPx: 48,
+    direction: -1,
+    measureRef: bottomMeasureRef,
+  })
   const [form, setForm] = useState<FormState>(initialForm)
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
@@ -48,8 +61,8 @@ export default function ContactSection(): React.JSX.Element {
   }
   return (
     <section id="contacto" className="contact-section" aria-labelledby="contacto-heading">
-      <div className="contact-section__top">
-        <div className="contact-section__top-inner">
+      <div ref={topMeasureRef} className="contact-section__top contact-section__top--parallax">
+        <div className="contact-section__top-inner" style={topParallax.parallaxStyle}>
           <div className="contact-section__intro-block">
             <h2 id="contacto-heading" className="contact-section__title">
               {t('contact.title')}
@@ -172,8 +185,8 @@ export default function ContactSection(): React.JSX.Element {
           </form>
         </div>
       </div>
-      <div className="contact-section__bottom">
-        <div className="contact-section__bottom-inner">
+      <div ref={bottomMeasureRef} className="contact-section__bottom contact-section__bottom--parallax">
+        <div className="contact-section__bottom-inner" style={bottomParallax.parallaxStyle}>
           <div className="contact-section__map-wrap">
             <iframe
               title={t('contact.mapTitle')}
@@ -243,10 +256,13 @@ export default function ContactSection(): React.JSX.Element {
                   </svg>
                 </span>
                 <span className="contact-section__card-label">{t('contact.cardHours')}</span>
-                <span className="contact-section__card-value">
-                  {t('contact.cardHoursLine1')}
-                  <br />
-                  {t('contact.cardHoursLine2')}
+                <span className="contact-section__card-value contact-section__card-value--hours">
+                  <span className="contact-section__hours-intro">{t('contact.cardHoursIntro')}</span>
+                  <ul className="contact-section__hours-list">
+                    <li>{t('contact.cardHoursWeekdays')}</li>
+                    <li>{t('contact.cardHoursSaturday')}</li>
+                    <li>{t('contact.cardHoursSunday')}</li>
+                  </ul>
                 </span>
               </li>
             </ul>

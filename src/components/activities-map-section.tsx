@@ -97,10 +97,11 @@ export default function ActivitiesMapSection(): React.JSX.Element {
       const denom = vh + rect.height
       const tScroll = denom > 0 ? Math.max(0, Math.min(1, (vh - rect.top) / denom)) : 0
       const u = tScroll - 0.5
+      const k = 2.1
       return {
-        x: u * 56,
-        y: u * 42,
-        route: u * -100,
+        x: u * 56 * k,
+        y: u * 42 * k,
+        route: u * -100 * k,
       }
     }
     let raf = 0

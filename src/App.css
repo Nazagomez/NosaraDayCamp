@@ -29,6 +29,10 @@ a.hero-arrow {
   color: #ffffff;
 }
 
+.home--parallax-bg {
+  will-change: background-position;
+}
+
 .overlay {
   position: relative;
   min-height: 100vh;
@@ -327,6 +331,14 @@ a.hero-arrow {
   display: block;
   width: 100%;
   height: clamp(56px, 9vw, 100px);
+}
+
+.about-section--parallax {
+  overflow: hidden;
+}
+
+.about-section__parallax-layer {
+  will-change: transform;
 }
 
 .about-section {
@@ -786,6 +798,14 @@ a.hero-arrow {
   border-bottom: 1px solid #e8edf2;
 }
 
+.team-section--parallax {
+  overflow: hidden;
+}
+
+.team-section__parallax-layer {
+  will-change: transform;
+}
+
 .team-section__inner {
   max-width: 1180px;
   margin: 0 auto;
@@ -975,6 +995,11 @@ a.hero-arrow {
   scroll-margin-top: 96px;
   border-bottom: 1px solid #e8edf2;
   color: #1a1f24;
+}
+
+.contact-section__top--parallax,
+.contact-section__bottom--parallax {
+  overflow: hidden;
 }
 
 .contact-section__top {
@@ -1260,6 +1285,35 @@ a.hero-arrow {
   text-decoration: underline;
 }
 
+.contact-section__card-value--hours {
+  text-align: left;
+}
+
+.contact-section__hours-intro {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #2a3530;
+}
+
+.contact-section__hours-list {
+  margin: 0;
+  padding-left: 1.15em;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #2a3530;
+}
+
+.contact-section__hours-list li {
+  margin-bottom: 6px;
+}
+
+.contact-section__hours-list li:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 900px) {
   .contact-section__top-inner,
   .contact-section__bottom-inner {
@@ -1367,13 +1421,11 @@ a.hero-arrow {
 
 .gallery-section__bg-image {
   position: absolute;
-  inset: -8%;
+  inset: -12%;
   background-size: cover;
   background-position: center;
   filter: blur(48px) saturate(1.05);
-  transition:
-    transform 0.55s ease-out,
-    opacity 0.45s ease;
+  transition: opacity 0.45s ease;
   will-change: transform;
 }
 
@@ -1393,6 +1445,7 @@ a.hero-arrow {
   z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
+  will-change: transform;
 }
 
 .gallery-section__title {

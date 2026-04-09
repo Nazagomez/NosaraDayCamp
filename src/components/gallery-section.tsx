@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useViewportParallax } from '../hooks/use-viewport-parallax'
 
 type GallerySlide = {
   readonly src: string
@@ -66,6 +67,11 @@ export default function GallerySection(): React.JSX.Element {
   const { t } = useTranslation()
   const gallerySlides = useMemo(() => buildGallerySlides(t), [t])
   const sectionRef = useRef<HTMLElement | null>(null)
+  const { parallaxStyle: galleryContentParallaxStyle } = useViewportParallax<HTMLElement>({
+    maxShiftPx: 48,
+    direction: -1,
+    measureRef: sectionRef,
+  })
   const [activeIndex, setActiveIndex] = useState(0)
   const [bgShiftY, setBgShiftY] = useState(0)
   const [slideGap, setSlideGap] = useState(210)
@@ -109,8 +115,8 @@ export default function GallerySection(): React.JSX.Element {
       const rect = el.getBoundingClientRect()
       const vh = window.innerHeight
       const center = rect.top + rect.height / 2
-      const tParallax = (center - vh * 0.5) / (vh * 0.9)
-      setBgShiftY(Math.max(-1, Math.min(1, tParallax)) * 28)
+      const tParallax = (center - vh * 0.5) / (vh * 0.62)
+      setBgShiftY(Math.max(-1, Math.min(1, tParallax)) * 72)
     }
     tick()
     window.addEventListener('scroll', tick, { passive: true })
@@ -156,12 +162,12 @@ export default function GallerySection(): React.JSX.Element {
           className="gallery-section__bg-image"
           style={{
             backgroundImage: `url(${activeSlide.src})`,
-            transform: `scale(1.18) translateY(${bgShiftY}px)`,
+            transform: `scale(1.24) translateY(${bgShiftY}px)`,
           }}
         />
         <div className="gallery-section__bg-scrim" />
       </div>
-      <div className="gallery-section__content">
+      <div className="gallery-section__content" style={galleryContentParallaxStyle}>
         <h2 id="galeria-heading" className="gallery-section__title">
           {t('gallery.title')}
         </h2>

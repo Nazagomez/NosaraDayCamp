@@ -1,4 +1,5 @@
 import { Trans, useTranslation } from 'react-i18next'
+import { useViewportParallax } from '../hooks/use-viewport-parallax'
 
 type TeamMember = {
   readonly name: string
@@ -20,8 +21,15 @@ const TEAM_MEMBERS: readonly TeamMember[] = [
  */
 export default function TeamSection(): React.JSX.Element {
   const { t } = useTranslation()
+  const parallax = useViewportParallax({ maxShiftPx: 60, direction: -1 })
   return (
-    <section id="team" className="team-section" aria-labelledby="team-heading">
+    <section
+      ref={parallax.sectionRef}
+      id="team"
+      className="team-section team-section--parallax"
+      aria-labelledby="team-heading"
+    >
+      <div className="team-section__parallax-layer" style={parallax.parallaxStyle}>
       <div className="team-section__inner">
         <header className="team-section__header">
           <span className="team-section__pill">{t('team.pill')}</span>
@@ -78,6 +86,7 @@ export default function TeamSection(): React.JSX.Element {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     </section>
   )

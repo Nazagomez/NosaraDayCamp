@@ -20,4 +20,11 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    files: ['src/pages/home-page.tsx', 'src/components/team-section.tsx'],
+    rules: {
+      // False positives: passing hook-returned ref + style to JSX (not reading ref.current).
+      'react-hooks/refs': 'off',
+    },
+  },
 ])

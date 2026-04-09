@@ -1,10 +1,11 @@
-import { useEffect, type MouseEvent } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import ActivitiesMapSection from '../components/activities-map-section'
 import GallerySection from '../components/gallery-section'
 import TeamSection from '../components/team-section'
 import ContactSection from '../components/contact-section'
 import heroBackgroundImage from '../assets/hero-background.png'
+import { useViewportParallax } from '../hooks/use-viewport-parallax'
 import { scrollToSectionId } from '../scroll-utils'
 
 /**
@@ -12,6 +13,8 @@ import { scrollToSectionId } from '../scroll-utils'
  */
 export default function HomePage(): React.JSX.Element {
   const { t } = useTranslation()
+  const [heroBgPosPercent, setHeroBgPosPercent] = useState(50)
+  const aboutParallax = useViewportParallax({ maxShiftPx: 56, direction: 1 })
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, '')
     if (!hash) {
@@ -22,13 +25,43 @@ export default function HomePage(): React.JSX.Element {
     }
     requestAnimationFrame(run)
   }, [])
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const tick = (): void => {
+      if (media.matches) {
+        setHeroBgPosPercent(50)
+        return
+      }
+      const scroll = window.scrollY
+      const vh = window.innerHeight
+      const cap = vh * 1.4
+      const p = Math.min(1, scroll / cap)
+      setHeroBgPosPercent(44 + p * 32)
+    }
+    tick()
+    window.addEventListener('scroll', tick, { passive: true })
+    window.addEventListener('resize', tick, { passive: true })
+    const onMedia = (): void => tick()
+    media.addEventListener('change', onMedia)
+    return () => {
+      window.removeEventListener('scroll', tick)
+      window.removeEventListener('resize', tick)
+      media.removeEventListener('change', onMedia)
+    }
+  }, [])
   const onInPageClick = (e: MouseEvent<HTMLAnchorElement>, id: string): void => {
     e.preventDefault()
     scrollToSectionId(id)
   }
   return (
     <>
-      <main className="home" style={{ backgroundImage: `url(${heroBackgroundImage})` }}>
+      <main
+        className="home home--parallax-bg"
+        style={{
+          backgroundImage: `url(${heroBackgroundImage})`,
+          backgroundPosition: `center ${heroBgPosPercent}%`,
+        }}
+      >
         <div className="overlay">
           <div className="hero-stage">
             <a
@@ -95,8 +128,14 @@ export default function HomePage(): React.JSX.Element {
           </div>
         </div>
       </main>
-      <section id="sobre-nosotros" className="about-section" aria-labelledby="sobre-nosotros-heading">
-        <div className="about-section__inner">
+      <section
+        ref={aboutParallax.sectionRef}
+        id="sobre-nosotros"
+        className="about-section about-section--parallax"
+        aria-labelledby="sobre-nosotros-heading"
+      >
+        <div className="about-section__parallax-layer" style={aboutParallax.parallaxStyle}>
+          <div className="about-section__inner">
           <div className="about-section__icons" aria-hidden="true">
             <svg className="about-section__icon about-section__icon--pine" viewBox="0 0 48 48">
               <path fill="currentColor" d="M24 4 14 22h6l-5 10h6l-4 8h26l-4-8h6l-5-10h6L24 4z" />
@@ -126,6 +165,7 @@ export default function HomePage(): React.JSX.Element {
               </a>
             </p>
           </div>
+        </div>
         </div>
       </section>
       <ActivitiesMapSection />
