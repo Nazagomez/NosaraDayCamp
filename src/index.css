@@ -10,7 +10,13 @@ body,
 }
 
 html {
-  scroll-padding-top: 88px;
+  scroll-padding-top: max(88px, calc(env(safe-area-inset-top, 0px) + 72px));
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: max(72px, calc(env(safe-area-inset-top, 0px) + 56px));
+  }
 }
 
 body {

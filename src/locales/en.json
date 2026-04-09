@@ -12,7 +12,10 @@
     "logoAlt": "Nosara Day Camp logo",
     "langSwitcher": "Language",
     "langEn": "English",
-    "langEs": "Spanish"
+    "langEs": "Spanish",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "drawerLabel": "Site navigation"
   },
   "home": {
     "metaSeason": "2026 season · Nosara",
