@@ -1,6 +1,8 @@
 import { useEffect, useState, type MouseEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import logoImage from '../assets/nosara-logo.png'
 import { scrollToSectionId } from '../scroll-utils'
+import LanguageSwitcher from './language-switcher'
 
 type NavbarSectionId =
   | 'inicio'
@@ -10,17 +12,8 @@ type NavbarSectionId =
   | 'team'
   | 'contacto'
 
-const NAV_LEFT: ReadonlyArray<{ readonly id: NavbarSectionId; readonly label: string }> = [
-  { id: 'inicio', label: 'Inicio' },
-  { id: 'sobre-nosotros', label: 'Sobre nosotros' },
-  { id: 'actividades', label: 'Actividades' },
-]
-
-const NAV_RIGHT: ReadonlyArray<{ readonly id: NavbarSectionId; readonly label: string }> = [
-  { id: 'galeria', label: 'Galería' },
-  { id: 'team', label: 'Team' },
-  { id: 'contacto', label: 'Contacto' },
-]
+const NAV_LEFT: readonly NavbarSectionId[] = ['inicio', 'sobre-nosotros', 'actividades']
+const NAV_RIGHT: readonly NavbarSectionId[] = ['galeria', 'team', 'contacto']
 
 const SECTION_IDS: readonly NavbarSectionId[] = [
   'inicio',
@@ -31,10 +24,20 @@ const SECTION_IDS: readonly NavbarSectionId[] = [
   'contacto',
 ]
 
+const SECTION_NAV_KEY: Record<NavbarSectionId, string> = {
+  inicio: 'nav.home',
+  'sobre-nosotros': 'nav.about',
+  actividades: 'nav.activities',
+  galeria: 'nav.gallery',
+  team: 'nav.team',
+  contacto: 'nav.contact',
+}
+
 /**
  * Site header with in-page section navigation.
  */
 export default function SiteNavbar(): React.JSX.Element {
+  const { t } = useTranslation()
   const [isNavScrolled, setIsNavScrolled] = useState(false)
   const [activeSectionId, setActiveSectionId] = useState<NavbarSectionId>('inicio')
   useEffect(() => {
@@ -63,16 +66,16 @@ export default function SiteNavbar(): React.JSX.Element {
   }
   return (
     <header className={`navbar ${isNavScrolled ? 'navbar--scrolled' : ''}`}>
-      <nav className="navbar__side navbar__side--left" aria-label="Secciones principales">
+      <nav className="navbar__side navbar__side--left" aria-label={t('nav.ariaMain')}>
         <ul className="nav-list">
-          {NAV_LEFT.map((item: { readonly id: NavbarSectionId; readonly label: string }) => (
-            <li key={item.id}>
+          {NAV_LEFT.map((id: NavbarSectionId) => (
+            <li key={id}>
               <a
-                className={activeSectionId === item.id ? 'nav-link nav-link--active' : 'nav-link'}
-                href={`#${item.id}`}
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => onNavClick(e, item.id)}
+                className={activeSectionId === id ? 'nav-link nav-link--active' : 'nav-link'}
+                href={`#${id}`}
+                onClick={(e: MouseEvent<HTMLAnchorElement>) => onNavClick(e, id)}
               >
-                {item.label}
+                {t(SECTION_NAV_KEY[id])}
               </a>
             </li>
           ))}
@@ -81,26 +84,29 @@ export default function SiteNavbar(): React.JSX.Element {
       <a
         href="#inicio"
         className={`logo-link${activeSectionId === 'inicio' ? ' logo-link--active' : ''}`}
-        aria-label="Ir al inicio"
+        aria-label={t('nav.logoToHome')}
         onClick={(e: MouseEvent<HTMLAnchorElement>) => onNavClick(e, 'inicio')}
       >
-        <img className="brand-logo" src={logoImage} alt="Nosara Day Camp logo" />
+        <img className="brand-logo" src={logoImage} alt={t('nav.logoAlt')} />
       </a>
-      <nav className="navbar__side navbar__side--right" aria-label="Más secciones">
-        <ul className="nav-list">
-          {NAV_RIGHT.map((item: { readonly id: NavbarSectionId; readonly label: string }) => (
-            <li key={item.id}>
-              <a
-                className={activeSectionId === item.id ? 'nav-link nav-link--active' : 'nav-link'}
-                href={`#${item.id}`}
-                onClick={(e: MouseEvent<HTMLAnchorElement>) => onNavClick(e, item.id)}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="navbar__right-wrap">
+        <nav className="navbar__side navbar__side--right" aria-label={t('nav.ariaMore')}>
+          <ul className="nav-list">
+            {NAV_RIGHT.map((id: NavbarSectionId) => (
+              <li key={id}>
+                <a
+                  className={activeSectionId === id ? 'nav-link nav-link--active' : 'nav-link'}
+                  href={`#${id}`}
+                  onClick={(e: MouseEvent<HTMLAnchorElement>) => onNavClick(e, id)}
+                >
+                  {t(SECTION_NAV_KEY[id])}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher />
+      </div>
     </header>
   )
 }

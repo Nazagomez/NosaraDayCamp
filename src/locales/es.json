@@ -1,0 +1,266 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre nosotros",
+    "activities": "Actividades",
+    "gallery": "Galería",
+    "team": "Team",
+    "contact": "Contacto",
+    "ariaMain": "Secciones principales",
+    "ariaMore": "Más secciones",
+    "logoToHome": "Ir al inicio",
+    "logoAlt": "Logo Nosara Day Camp",
+    "langSwitcher": "Idioma",
+    "langEn": "Inglés",
+    "langEs": "Español"
+  },
+  "home": {
+    "metaSeason": "Temporada 2026 · Nosara",
+    "tagline": "Real Jungle Adventures for Kids",
+    "title": "NosaraDayCamp",
+    "description": "Aventuras seguras, naturaleza y actividades inolvidables para niños en Nosara. Exploración, cabalgatas, juegos en equipo y un equipo que cuida cada detalle.",
+    "cta": "Ver programa",
+    "ariaHeroLeft": "Ir al inicio",
+    "ariaHeroRight": "Ir a Sobre nosotros"
+  },
+  "about": {
+    "title": "Sobre nosotros",
+    "p1": "Nuestro campamento está diseñado para ofrecer a los niños una experiencia divertida, educativa y segura, en contacto con la naturaleza y con muchas aventuras al aire libre. Contamos con aproximadamente 30 actividades diferentes, todas únicas y pensadas para que los niños disfruten mientras aprenden.",
+    "p2": "Además de la diversión, desarrollamos un programa educativo enfocado en enseñar la importancia de los recursos naturales y la conservación del ambiente. Nuestro campamento nace con la idea de combinar recreación, aprendizaje y conexión con la naturaleza. Más que solo entretener a los niños, buscamos que vivan experiencias significativas que les ayuden a valorar el ambiente, los animales y los recursos naturales de nuestra comunidad.",
+    "p3": "A través de excursiones, clases especiales y actividades recreativas, promovemos valores como el respeto por la naturaleza, la convivencia, el trabajo en equipo y la seguridad personal.",
+    "readMore": "Leer más"
+  },
+  "map": {
+    "watermark": "ACTIVIDADES",
+    "kicker": "Nosara Day Camp",
+    "title": "Actividades",
+    "lead": "Más de 30 experiencias organizadas en seis rutas. El mapa se mueve suavemente al hacer scroll.",
+    "activitiesCount": "{{count}} actividades",
+    "legendAria": "Resumen por categoría",
+    "categories": {
+      "nature": {
+        "title": "Nature",
+        "subtitle": "Fincas, fauna y bosque"
+      },
+      "water": {
+        "title": "Water Fun",
+        "subtitle": "Mar, río y pozas"
+      },
+      "adventure": {
+        "title": "Adventure",
+        "subtitle": "Cuevas, cuerdas y más"
+      },
+      "learning": {
+        "title": "Learning",
+        "subtitle": "Ciencia y talleres"
+      },
+      "sports": {
+        "title": "Sports",
+        "subtitle": "Equipo y juegos"
+      },
+      "giving": {
+        "title": "Giving Back",
+        "subtitle": "Voluntariado verde"
+      }
+    }
+  },
+  "gallery": {
+    "title": "Galería",
+    "intro": "Momentos reales del campamento: naturaleza, aprendizaje y diversión ({{count}} fotos).",
+    "introEmpty": "Pronto añadiremos fotos del campamento.",
+    "carousel": "carrusel",
+    "prev": "Foto anterior",
+    "next": "Foto siguiente",
+    "selectPhoto": "Seleccionar foto",
+    "dotLabel": "Ver foto {{n}} de {{total}}: {{title}}",
+    "slides": [
+      {
+        "title": "Agua y costa",
+        "tag": "#Water Fun",
+        "caption": "Días de exploración y juego seguro junto al mar.",
+        "alt": "Niños y staff en aguas poco profundas junto a rocas"
+      },
+      {
+        "title": "Celebraciones",
+        "tag": "#Comunidad",
+        "caption": "Momentos compartidos alrededor de la mesa.",
+        "alt": "Niños en una mesa larga con globos y pastel"
+      },
+      {
+        "title": "Cocina creativa",
+        "tag": "#Learning",
+        "caption": "Talleres de cocina y manualidades al aire libre.",
+        "alt": "Niños preparando masa en una mesa bajo carpa"
+      },
+      {
+        "title": "Aprendiendo juntos",
+        "tag": "#Learning",
+        "caption": "Actividades prácticas que despiertan la curiosidad.",
+        "alt": "Niños rallando queso en actividad de cocina"
+      },
+      {
+        "title": "Senderos y naturaleza",
+        "tag": "#Adventure",
+        "caption": "Caminatas por el bosque con guías del campamento.",
+        "alt": "Grupo de niños caminando por sendero entre vegetación"
+      },
+      {
+        "title": "Aventura en la finca",
+        "tag": "#Nature",
+        "caption": "Experiencias auténticas con animales y entorno rural.",
+        "alt": "Niño sonriente montando un búfalo de agua"
+      },
+      {
+        "title": "Diversión en el agua",
+        "tag": "#Water Fun",
+        "caption": "Juegos y descubrimientos en entornos acuáticos.",
+        "alt": "Actividad acuática del campamento"
+      },
+      {
+        "title": "Equipo y energía",
+        "tag": "#Sports",
+        "caption": "Movimiento, juego y trabajo en equipo.",
+        "alt": "Niños en actividad deportiva o de grupo"
+      },
+      {
+        "title": "Descubriendo la naturaleza",
+        "tag": "#Nature",
+        "caption": "Conexión con plantas, animales y paisajes de Nosara.",
+        "alt": "Exploración en la naturaleza"
+      },
+      {
+        "title": "Creatividad y talleres",
+        "tag": "#Learning",
+        "caption": "Manos a la obra con proyectos guiados.",
+        "alt": "Taller creativo en el campamento"
+      },
+      {
+        "title": "Rutas y exploración",
+        "tag": "#Adventure",
+        "caption": "Excursiones y salidas con supervisión cercana.",
+        "alt": "Excursión o caminata del day camp"
+      },
+      {
+        "title": "Comunidad y amistad",
+        "tag": "#Comunidad",
+        "caption": "Días llenos de risas y compañerismo.",
+        "alt": "Grupo de niños en actividad conjunta"
+      },
+      {
+        "title": "Cuidando el entorno",
+        "tag": "#Giving Back",
+        "caption": "Pequeñas acciones que enseñan a valorar el ambiente.",
+        "alt": "Actividad de cuidado ambiental o voluntariado"
+      },
+      {
+        "title": "Costa y marea",
+        "tag": "#Water Fun",
+        "caption": "La playa y el mar como aula al aire libre.",
+        "alt": "Momento en la playa o zona costera"
+      },
+      {
+        "title": "Juegos al sol",
+        "tag": "#Sports",
+        "caption": "Actividades recreativas bajo el cielo de Guanacaste.",
+        "alt": "Juegos al aire libre"
+      },
+      {
+        "title": "Momentos únicos",
+        "tag": "#Campamento",
+        "caption": "Instantes que quedan en la memoria de cada niño.",
+        "alt": "Momento especial del Nosara Day Camp"
+      },
+      {
+        "title": "Aventura en grupo",
+        "tag": "#Adventure",
+        "caption": "Retos y descubrimientos compartidos.",
+        "alt": "Aventura grupal en el campamento"
+      },
+      {
+        "title": "Aprendizaje activo",
+        "tag": "#Learning",
+        "caption": "Experiencias que combinan diversión y conocimiento.",
+        "alt": "Actividad educativa del campamento"
+      },
+      {
+        "title": "Naturaleza viva",
+        "tag": "#Nature",
+        "caption": "Paisajes y biodiversidad de la región.",
+        "alt": "Escena natural durante el campamento"
+      },
+      {
+        "title": "Sonrisas de Nosara",
+        "tag": "#Momentos",
+        "caption": "El espíritu del Nosara Day Camp en una imagen.",
+        "alt": "Foto del campamento Nosara Day Camp"
+      }
+    ],
+    "defaultSlide": {
+      "title": "Nosara Day Camp",
+      "tag": "#Campamento",
+      "caption": "Aventuras y aprendizaje en la naturaleza.",
+      "alt": "Fotografía del Nosara Day Camp"
+    }
+  },
+  "team": {
+    "pill": "Equipo",
+    "title": "Team Nosara Day Camp",
+    "lead": "Personas de confianza que acompañan a los niños en cada salida, con estándares claros de seguridad y calidez humana.",
+    "intro": "Contamos con <1>1 counselor por cada 4 niños</1>, de modo que nadie queda sin supervisión cercana. Todo el equipo de campo está <2>certificado en primeros auxilios</2> y aporta <3>años de experiencia</3> trabajando con menores, excursiones y actividades al aire libre en Nosara. La administración está a cargo de <4>Cinthya Rosales</4>. Las guías y counselors <5>Laura Rosales, Emily Rosales, Wilberth Serrano e Ines Rosales</5> conocen el entorno, acompañan con paciencia y aplican los protocolos de seguridad del campamento.",
+    "highlightsAria": "Compromisos del equipo",
+    "hRatio": "Ratio",
+    "hRatioValue": "1 : 4",
+    "hRatioDesc": "Un counselor por cada cuatro niños",
+    "hHealth": "Salud",
+    "hHealthValue": "Primeros auxilios",
+    "hHealthDesc": "Certificación al día en el equipo",
+    "hExp": "Experiencia",
+    "hExpValue": "Trayectoria",
+    "hExpDesc": "Años cuidando niños en campamento y naturaleza",
+    "roles": {
+      "admin": "Administradora",
+      "counselor": "Counselor y guía"
+    }
+  },
+  "contact": {
+    "title": "Escríbenos, te respondemos pronto",
+    "subtitle": "Cuéntanos la edad de los niños, las fechas que te interesan y cualquier duda sobre horarios o actividades. Te orientamos con gusto para elegir la mejor experiencia en Nosara Day Camp.",
+    "socialLabel": "Síguenos y escríbenos",
+    "socialAria": "Redes sociales",
+    "fieldName": "Nombre",
+    "fieldPhone": "Teléfono",
+    "fieldEmail": "Email",
+    "fieldSubject": "Asunto",
+    "fieldMessage": "Mensaje",
+    "phName": "Tu nombre",
+    "phPhone": "+506 …",
+    "phEmail": "correo@ejemplo.com",
+    "phSubject": "Fechas, edades, consulta...",
+    "phMessage": "Cuéntanos en qué podemos ayudarte...",
+    "submit": "Enviar mensaje",
+    "formNote": "Al enviar se abrirá WhatsApp con tu mensaje listo para enviar al +506 8606 8903.",
+    "mapTitle": "Mapa: Nosara, Guanacaste",
+    "mapLink": "Ver mapa más grande",
+    "detailsTitle": "Hablemos",
+    "detailsLead": "Estamos en Nosara, Costa Rica. Llama, escribe por WhatsApp o visítanos con cita previa.",
+    "cardLocation": "Ubicación",
+    "cardLocationValue": "Nosara, Nicoya, Guanacaste, Costa Rica",
+    "cardPhone": "Teléfono / WhatsApp",
+    "cardWrite": "Escríbenos",
+    "cardWriteValue": "Usa el formulario o WhatsApp para una respuesta rápida.",
+    "cardHours": "Horario",
+    "cardHoursLine1": "Lun – Sáb: 8:00 a.m. – 6:00 p.m.",
+    "cardHoursLine2": "Domingo: cerrado",
+    "wa": {
+      "greeting": "Hola, soy {{name}}.",
+      "noName": "(sin nombre)",
+      "phone": "Tel: {{phone}}",
+      "email": "Email: {{email}}",
+      "subject": "Asunto: {{subject}}",
+      "noMessage": "(sin mensaje)"
+    }
+  },
+  "footer": {
+    "line": "NosaraDayCamp - Real Jungle Adventures for Kids"
+  }
+}

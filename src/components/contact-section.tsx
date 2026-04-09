@@ -1,4 +1,5 @@
 import { type FormEvent, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const WHATSAPP_E164 = '50686068903'
 const MAP_EMBED_SRC =
@@ -26,16 +27,20 @@ const initialForm: FormState = {
  * Contact section: form, social links, map and detail cards.
  */
 export default function ContactSection(): React.JSX.Element {
+  const { t } = useTranslation()
   const [form, setForm] = useState<FormState>(initialForm)
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault()
+    const nameLine = t('contact.wa.greeting', {
+      name: form.name.trim() ? form.name.trim() : t('contact.wa.noName'),
+    })
     const lines = [
-      `Hola, soy ${form.name || '(sin nombre)'}.`,
-      form.phone ? `Tel: ${form.phone}` : '',
-      form.email ? `Email: ${form.email}` : '',
-      form.subject ? `Asunto: ${form.subject}` : '',
+      nameLine,
+      form.phone.trim() ? t('contact.wa.phone', { phone: form.phone.trim() }) : '',
+      form.email.trim() ? t('contact.wa.email', { email: form.email.trim() }) : '',
+      form.subject.trim() ? t('contact.wa.subject', { subject: form.subject.trim() }) : '',
       '',
-      form.message || '(sin mensaje)',
+      form.message.trim() ? form.message.trim() : t('contact.wa.noMessage'),
     ].filter(Boolean)
     const text = lines.join('\n')
     const url = `https://wa.me/${WHATSAPP_E164}?text=${encodeURIComponent(text)}`
@@ -47,14 +52,11 @@ export default function ContactSection(): React.JSX.Element {
         <div className="contact-section__top-inner">
           <div className="contact-section__intro-block">
             <h2 id="contacto-heading" className="contact-section__title">
-              Escríbenos, te respondemos pronto
+              {t('contact.title')}
             </h2>
-            <p className="contact-section__subtitle">
-              Cuéntanos la edad de los niños, las fechas que te interesan y cualquier duda sobre horarios o
-              actividades. Te orientamos con gusto para elegir la mejor experiencia en Nosara Day Camp.
-            </p>
-            <p className="contact-section__social-label">Síguenos y escríbenos</p>
-            <ul className="contact-section__social" aria-label="Redes sociales">
+            <p className="contact-section__subtitle">{t('contact.subtitle')}</p>
+            <p className="contact-section__social-label">{t('contact.socialLabel')}</p>
+            <ul className="contact-section__social" aria-label={t('contact.socialAria')}>
               <li>
                 <a
                   className="contact-section__social-btn"
@@ -108,23 +110,23 @@ export default function ContactSection(): React.JSX.Element {
           <form className="contact-section__form" onSubmit={handleSubmit} noValidate>
             <div className="contact-section__form-row">
               <label className="contact-section__field">
-                <span className="contact-section__label">Nombre</span>
+                <span className="contact-section__label">{t('contact.fieldName')}</span>
                 <input
                   type="text"
                   name="name"
                   autoComplete="name"
-                  placeholder="Tu nombre"
+                  placeholder={t('contact.phName')}
                   value={form.name}
                   onChange={(e) => setForm((f: FormState) => ({ ...f, name: e.target.value }))}
                 />
               </label>
               <label className="contact-section__field">
-                <span className="contact-section__label">Teléfono</span>
+                <span className="contact-section__label">{t('contact.fieldPhone')}</span>
                 <input
                   type="tel"
                   name="phone"
                   autoComplete="tel"
-                  placeholder="+506 ..."
+                  placeholder={t('contact.phPhone')}
                   value={form.phone}
                   onChange={(e) => setForm((f: FormState) => ({ ...f, phone: e.target.value }))}
                 />
@@ -132,43 +134,41 @@ export default function ContactSection(): React.JSX.Element {
             </div>
             <div className="contact-section__form-row">
               <label className="contact-section__field">
-                <span className="contact-section__label">Email</span>
+                <span className="contact-section__label">{t('contact.fieldEmail')}</span>
                 <input
                   type="email"
                   name="email"
                   autoComplete="email"
-                  placeholder="correo@ejemplo.com"
+                  placeholder={t('contact.phEmail')}
                   value={form.email}
                   onChange={(e) => setForm((f: FormState) => ({ ...f, email: e.target.value }))}
                 />
               </label>
               <label className="contact-section__field">
-                <span className="contact-section__label">Asunto</span>
+                <span className="contact-section__label">{t('contact.fieldSubject')}</span>
                 <input
                   type="text"
                   name="subject"
-                  placeholder="Fechas, edades, consulta..."
+                  placeholder={t('contact.phSubject')}
                   value={form.subject}
                   onChange={(e) => setForm((f: FormState) => ({ ...f, subject: e.target.value }))}
                 />
               </label>
             </div>
             <label className="contact-section__field contact-section__field--full">
-              <span className="contact-section__label">Mensaje</span>
+              <span className="contact-section__label">{t('contact.fieldMessage')}</span>
               <textarea
                 name="message"
                 rows={5}
-                placeholder="Cuéntanos en qué podemos ayudarte..."
+                placeholder={t('contact.phMessage')}
                 value={form.message}
                 onChange={(e) => setForm((f: FormState) => ({ ...f, message: e.target.value }))}
               />
             </label>
             <button type="submit" className="contact-section__submit">
-              Enviar mensaje
+              {t('contact.submit')}
             </button>
-            <p className="contact-section__form-note">
-              Al enviar se abrirá WhatsApp con tu mensaje listo para enviar al +506 8606 8903.
-            </p>
+            <p className="contact-section__form-note">{t('contact.formNote')}</p>
           </form>
         </div>
       </div>
@@ -176,7 +176,7 @@ export default function ContactSection(): React.JSX.Element {
         <div className="contact-section__bottom-inner">
           <div className="contact-section__map-wrap">
             <iframe
-              title="Mapa: Nosara, Guanacaste"
+              title={t('contact.mapTitle')}
               className="contact-section__map"
               src={MAP_EMBED_SRC}
               loading="lazy"
@@ -188,14 +188,12 @@ export default function ContactSection(): React.JSX.Element {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Ver mapa más grande
+              {t('contact.mapLink')}
             </a>
           </div>
           <div className="contact-section__details">
-            <h3 className="contact-section__details-title">Hablemos</h3>
-            <p className="contact-section__details-lead">
-              Estamos en Nosara, Costa Rica. Llama, escribe por WhatsApp o visítanos con cita previa.
-            </p>
+            <h3 className="contact-section__details-title">{t('contact.detailsTitle')}</h3>
+            <p className="contact-section__details-lead">{t('contact.detailsLead')}</p>
             <ul className="contact-section__cards" role="list">
               <li className="contact-section__card">
                 <span className="contact-section__card-icon" aria-hidden="true">
@@ -206,10 +204,8 @@ export default function ContactSection(): React.JSX.Element {
                     />
                   </svg>
                 </span>
-                <span className="contact-section__card-label">Ubicación</span>
-                <span className="contact-section__card-value">
-                  Nosara, Nicoya, Guanacaste, Costa Rica
-                </span>
+                <span className="contact-section__card-label">{t('contact.cardLocation')}</span>
+                <span className="contact-section__card-value">{t('contact.cardLocationValue')}</span>
               </li>
               <li className="contact-section__card">
                 <span className="contact-section__card-icon" aria-hidden="true">
@@ -220,7 +216,7 @@ export default function ContactSection(): React.JSX.Element {
                     />
                   </svg>
                 </span>
-                <span className="contact-section__card-label">Teléfono / WhatsApp</span>
+                <span className="contact-section__card-label">{t('contact.cardPhone')}</span>
                 <a className="contact-section__card-value contact-section__card-link" href="tel:+50686068903">
                   +506 8606 8903
                 </a>
@@ -234,10 +230,8 @@ export default function ContactSection(): React.JSX.Element {
                     />
                   </svg>
                 </span>
-                <span className="contact-section__card-label">Escríbenos</span>
-                <span className="contact-section__card-value">
-                  Usa el formulario o WhatsApp para una respuesta rápida.
-                </span>
+                <span className="contact-section__card-label">{t('contact.cardWrite')}</span>
+                <span className="contact-section__card-value">{t('contact.cardWriteValue')}</span>
               </li>
               <li className="contact-section__card">
                 <span className="contact-section__card-icon" aria-hidden="true">
@@ -248,11 +242,11 @@ export default function ContactSection(): React.JSX.Element {
                     />
                   </svg>
                 </span>
-                <span className="contact-section__card-label">Horario</span>
+                <span className="contact-section__card-label">{t('contact.cardHours')}</span>
                 <span className="contact-section__card-value">
-                  Lun – Sáb: 8:00 a.m. – 6:00 p.m.
+                  {t('contact.cardHoursLine1')}
                   <br />
-                  Domingo: cerrado
+                  {t('contact.cardHoursLine2')}
                 </span>
               </li>
             </ul>

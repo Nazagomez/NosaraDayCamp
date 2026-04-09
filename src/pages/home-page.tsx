@@ -1,4 +1,5 @@
 import { useEffect, type MouseEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import ActivitiesMapSection from '../components/activities-map-section'
 import GallerySection from '../components/gallery-section'
 import TeamSection from '../components/team-section'
@@ -10,6 +11,7 @@ import { scrollToSectionId } from '../scroll-utils'
  * Single scrolling landing: hero + all sections.
  */
 export default function HomePage(): React.JSX.Element {
+  const { t } = useTranslation()
   useEffect(() => {
     const hash = window.location.hash.replace(/^#/, '')
     if (!hash) {
@@ -32,7 +34,7 @@ export default function HomePage(): React.JSX.Element {
             <a
               href="#inicio"
               className="hero-arrow hero-arrow--left"
-              aria-label="Ir al inicio"
+              aria-label={t('home.ariaHeroLeft')}
               onClick={(e: MouseEvent<HTMLAnchorElement>) => onInPageClick(e, 'inicio')}
             >
               <span aria-hidden="true">&#8249;</span>
@@ -46,7 +48,7 @@ export default function HomePage(): React.JSX.Element {
                       d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"
                     />
                   </svg>
-                  Temporada 2026 · Nosara
+                  {t('home.metaSeason')}
                 </span>
                 <span className="hero-meta__item">
                   <svg className="hero-meta__icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,20 +57,17 @@ export default function HomePage(): React.JSX.Element {
                       d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
                     />
                   </svg>
-                  Real Jungle Adventures for Kids
+                  {t('home.tagline')}
                 </span>
               </div>
-              <h1 className="hero-title">NosaraDayCamp</h1>
-              <p className="hero-description">
-                Aventuras seguras, naturaleza y actividades inolvidables para niños en Nosara. Exploración,
-                cabalgatas, juegos en equipo y un equipo que cuida cada detalle.
-              </p>
+              <h1 className="hero-title">{t('home.title')}</h1>
+              <p className="hero-description">{t('home.description')}</p>
               <a
                 href="#sobre-nosotros"
                 className="hero-button"
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => onInPageClick(e, 'sobre-nosotros')}
               >
-                <span>Ver programa</span>
+                <span>{t('home.cta')}</span>
                 <svg className="hero-button__arrow" viewBox="0 0 24 24" aria-hidden="true">
                   <path
                     fill="currentColor"
@@ -80,7 +79,7 @@ export default function HomePage(): React.JSX.Element {
             <a
               href="#sobre-nosotros"
               className="hero-arrow hero-arrow--right"
-              aria-label="Ir a Sobre nosotros"
+              aria-label={t('home.ariaHeroRight')}
               onClick={(e: MouseEvent<HTMLAnchorElement>) => onInPageClick(e, 'sobre-nosotros')}
             >
               <span aria-hidden="true">&#8250;</span>
@@ -111,31 +110,19 @@ export default function HomePage(): React.JSX.Element {
             </svg>
           </div>
           <h2 id="sobre-nosotros-heading" className="about-section__title">
-            Sobre nosotros
+            {t('about.title')}
           </h2>
           <div className="about-section__body">
+            <p>{t('about.p1')}</p>
+            <p>{t('about.p2')}</p>
             <p>
-              Nuestro campamento está diseñado para ofrecer a los niños una experiencia divertida, educativa y
-              segura, en contacto con la naturaleza y con muchas aventuras al aire libre. Contamos con
-              aproximadamente 30 actividades diferentes, todas únicas y pensadas para que los niños disfruten
-              mientras aprenden.
-            </p>
-            <p>
-              Además de la diversión, desarrollamos un programa educativo enfocado en enseñar la importancia de
-              los recursos naturales y la conservación del ambiente. Nuestro campamento nace con la idea de
-              combinar recreación, aprendizaje y conexión con la naturaleza. Más que solo entretener a los niños,
-              buscamos que vivan experiencias significativas que les ayuden a valorar el ambiente, los animales y
-              los recursos naturales de nuestra comunidad.
-            </p>
-            <p>
-              A través de excursiones, clases especiales y actividades recreativas, promovemos valores como el
-              respeto por la naturaleza, la convivencia, el trabajo en equipo y la seguridad personal.{' '}
+              {t('about.p3')}{' '}
               <a
                 href="#actividades"
                 className="about-section__more"
                 onClick={(e: MouseEvent<HTMLAnchorElement>) => onInPageClick(e, 'actividades')}
               >
-                Leer más
+                {t('about.readMore')}
               </a>
             </p>
           </div>

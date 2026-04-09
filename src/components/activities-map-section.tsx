@@ -1,22 +1,24 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
-type MapCategory = {
-  readonly title: string
+type MapCategoryId = 'nature' | 'water' | 'adventure' | 'learning' | 'sports' | 'giving'
+
+type MapCategoryDef = {
+  readonly id: MapCategoryId
   readonly count: number
-  readonly subtitle: string
   readonly icon: 'nature' | 'water' | 'adventure' | 'learning' | 'sports' | 'giving'
 }
 
-const MAP_CATEGORIES: readonly MapCategory[] = [
-  { title: 'Nature', count: 5, subtitle: 'Fincas, fauna y bosque', icon: 'nature' },
-  { title: 'Water Fun', count: 7, subtitle: 'Mar, río y pozas', icon: 'water' },
-  { title: 'Adventure', count: 5, subtitle: 'Cuevas, cuerdas y más', icon: 'adventure' },
-  { title: 'Learning', count: 4, subtitle: 'Ciencia y talleres', icon: 'learning' },
-  { title: 'Sports', count: 3, subtitle: 'Equipo y juegos', icon: 'sports' },
-  { title: 'Giving Back', count: 4, subtitle: 'Voluntariado verde', icon: 'giving' },
+const MAP_CATEGORY_DEFS: readonly MapCategoryDef[] = [
+  { id: 'nature', count: 5, icon: 'nature' },
+  { id: 'water', count: 7, icon: 'water' },
+  { id: 'adventure', count: 5, icon: 'adventure' },
+  { id: 'learning', count: 4, icon: 'learning' },
+  { id: 'sports', count: 3, icon: 'sports' },
+  { id: 'giving', count: 4, icon: 'giving' },
 ]
 
-function MapCategoryIcon(props: { readonly variant: MapCategory['icon'] }): React.JSX.Element | null {
+function MapCategoryIcon(props: { readonly variant: MapCategoryDef['icon'] }): React.JSX.Element | null {
   const stroke = '#5a6b62'
   const common = {
     fill: 'none' as const,
@@ -77,6 +79,7 @@ type ParallaxShift = { readonly x: number; readonly y: number; readonly route: n
  * Map-style activities section with parallax background and dotted route.
  */
 export default function ActivitiesMapSection(): React.JSX.Element {
+  const { t } = useTranslation()
   const sectionRef = useRef<HTMLElement | null>(null)
   const [shift, setShift] = useState<ParallaxShift>({ x: 0, y: 0, route: 0 })
   useEffect(() => {
@@ -92,8 +95,8 @@ export default function ActivitiesMapSection(): React.JSX.Element {
       const rect = el.getBoundingClientRect()
       const vh = window.innerHeight
       const denom = vh + rect.height
-      const t = denom > 0 ? Math.max(0, Math.min(1, (vh - rect.top) / denom)) : 0
-      const u = t - 0.5
+      const tScroll = denom > 0 ? Math.max(0, Math.min(1, (vh - rect.top) / denom)) : 0
+      const u = tScroll - 0.5
       return {
         x: u * 56,
         y: u * 42,
@@ -144,16 +147,14 @@ export default function ActivitiesMapSection(): React.JSX.Element {
         }}
         aria-hidden="true"
       >
-        ACTIVIDADES
+        {t('map.watermark')}
       </div>
       <div className="activities-map-section__inner">
-        <p className="activities-map-section__kicker">Nosara Day Camp</p>
+        <p className="activities-map-section__kicker">{t('map.kicker')}</p>
         <h2 id="actividades-heading" className="activities-map-section__title">
-          Actividades
+          {t('map.title')}
         </h2>
-        <p className="activities-map-section__lead">
-          Más de 30 experiencias organizadas en seis rutas. El mapa se mueve suavemente al hacer scroll.
-        </p>
+        <p className="activities-map-section__lead">{t('map.lead')}</p>
         <div className="activities-map-section__stage">
           <div className="activities-map-section__route-viewport" aria-hidden="true">
             <div
@@ -184,29 +185,31 @@ export default function ActivitiesMapSection(): React.JSX.Element {
             </div>
           </div>
           <div className="activities-map-section__track" role="list">
-            {MAP_CATEGORIES.map((cat: MapCategory, index: number) => (
-              <div key={cat.title} className="activities-map-section__track-cell" role="listitem">
+            {MAP_CATEGORY_DEFS.map((cat: MapCategoryDef, index: number) => (
+              <div key={cat.id} className="activities-map-section__track-cell" role="listitem">
                 {index > 0 ? <div className="activities-map-section__connector" aria-hidden="true" /> : null}
                 <article className="map-stop">
                   <div className="map-stop__icon-wrap">
                     <MapCategoryIcon variant={cat.icon} />
                   </div>
-                  <h3 className="map-stop__title">{cat.title}</h3>
-                  <p className="map-stop__meta">{cat.count} actividades</p>
-                  <p className="map-stop__subtitle">{cat.subtitle}</p>
+                  <h3 className="map-stop__title">{t(`map.categories.${cat.id}.title`)}</h3>
+                  <p className="map-stop__meta">{t('map.activitiesCount', { count: cat.count })}</p>
+                  <p className="map-stop__subtitle">{t(`map.categories.${cat.id}.subtitle`)}</p>
                   <div className="map-stop__pin" aria-hidden="true" />
                 </article>
               </div>
             ))}
           </div>
         </div>
-        <div className="activities-map-section__legend" aria-label="Resumen por categoría">
-          {MAP_CATEGORIES.map((cat: MapCategory) => (
-            <div key={`legend-${cat.title}`} className="activities-map-section__legend-item">
+        <div className="activities-map-section__legend" aria-label={t('map.legendAria')}>
+          {MAP_CATEGORY_DEFS.map((cat: MapCategoryDef) => (
+            <div key={`legend-${cat.id}`} className="activities-map-section__legend-item">
               <div className="activities-map-section__legend-icon">
                 <MapCategoryIcon variant={cat.icon} />
               </div>
-              <span className="activities-map-section__legend-label">{cat.title}</span>
+              <span className="activities-map-section__legend-label">
+                {t(`map.categories.${cat.id}.title`)}
+              </span>
               <span className="activities-map-section__legend-count">{cat.count}</span>
             </div>
           ))}
